@@ -7,14 +7,12 @@ namespace FantasyRPG.Core.Combat
     /// </summary>
     public class PlayerTurnState : ICombatState
     {
-        private readonly CombatStateMachine _stateMachine;
         private readonly Hero _activeHero;
 
         public int CurrentAP { get; private set; }
 
-        public PlayerTurnState(CombatStateMachine stateMachine, Hero activeHero)
+        public PlayerTurnState(Hero activeHero)
         {
-            _stateMachine = stateMachine;
             _activeHero = activeHero;
         }
 
@@ -37,5 +35,3 @@ namespace FantasyRPG.Core.Combat
         public void Exit() { }
     }
 }
-
-

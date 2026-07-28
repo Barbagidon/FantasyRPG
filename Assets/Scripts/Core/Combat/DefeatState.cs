@@ -5,16 +5,10 @@ namespace FantasyRPG.Core.Combat
     /// </summary>
     public class DefeatState : ICombatState
     {
-        private readonly CombatStateMachine _stateMachine;
-
-        public DefeatState(CombatStateMachine stateMachine)
-        {
-            _stateMachine = stateMachine;
-        }
+        public DefeatState() { }
 
         public void Enter() { }
 
         public void Exit() { }
     }
 }
-

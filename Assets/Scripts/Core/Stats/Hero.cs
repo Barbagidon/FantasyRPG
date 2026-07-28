@@ -1,3 +1,4 @@
+using System;
 using FantasyRPG.Core.Items;
 
 namespace FantasyRPG.Core.Stats
@@ -25,6 +26,21 @@ namespace FantasyRPG.Core.Stats
         public void EquipArmor(Armor armor)
         {
             EquippedArmor = armor;
+        }
+
+        public void TakeDamage(int damageAmount)
+        {
+            int newHealth = Math.Max(0, Stats.CurrentHealth - damageAmount);
+            Stats = new HeroStats(
+                Stats.MaxHealth,
+                newHealth,
+                Stats.MaxActionPoints,
+                Stats.BaseAttack,
+                Stats.BaseDefense,
+                Stats.Speed,
+                Stats.CritChance,
+                Stats.CritMultiplier
+            );
         }
     }
 }

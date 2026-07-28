@@ -1,3 +1,5 @@
+using FantasyRPG.Core.Stats;
+
 namespace FantasyRPG.Core.Combat
 {
     /// <summary>
@@ -5,14 +7,12 @@ namespace FantasyRPG.Core.Combat
     /// </summary>
     public class EnemyTurnState : ICombatState
     {
-        private readonly CombatStateMachine _stateMachine;
         private readonly Hero _enemyUnit;
 
         public int CurrentAP { get; private set; }
 
-        public EnemyTurnState(CombatStateMachine stateMachine, Hero enemyUnit)
+        public EnemyTurnState(Hero enemyUnit)
         {
-            _stateMachine = stateMachine;
             _enemyUnit = enemyUnit;
         }
 
@@ -35,5 +35,3 @@ namespace FantasyRPG.Core.Combat
         }
     }
 }
-
-

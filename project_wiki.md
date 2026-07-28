@@ -47,11 +47,11 @@
 - [x] Состояние хода игрока и списание AP ([PlayerTurnState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/PlayerTurnState.cs))
 - [x] Состояние хода ИИ врага ([EnemyTurnState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/EnemyTurnState.cs))
 - [x] Состояния окончания боя ([VictoryState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/VictoryState.cs), [DefeatState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/DefeatState.cs))
-- [x] Пошаговый боевой движок ([TurnBasedCombatEngine.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/TurnBasedCombatEngine.cs))
+- [x] **Главный боевой движок** ([TurnBasedCombatEngine.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/TurnBasedCombatEngine.cs)) 🎉
 
 ### 🔹 Сессия 3: Расовая подсистема, Квесты и Event Bus (Quests & Event Bus) — СЛЕДУЮЩАЯ 🚀
+- [x] **Паттерн Command для боевых действий** ([ICombatCommand.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/ICombatCommand.cs), [AttackCommand.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/AttackCommand.cs)) 🎉
 - [ ] Расовая подсистема (`RaceType.cs`, `RaceBonus.cs`)
-- [ ] Event Bus (Событийный автобус: `OnEnemyKilled`, `OnItemCollected`)
 - [ ] Движок квестов и целей (`Quest`, `Objective`)
 - [ ] Инвентарь и экипировка предметов (`EquipmentSystem`)
 
