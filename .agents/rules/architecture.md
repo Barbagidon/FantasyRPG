@@ -28,3 +28,4 @@ Assets/Scripts/
    - **Properties**: Use `{ get; private set; }` for domain entity attributes to enforce strict read-only access from external classes.
    - **Memory Efficiency (GC Optimization)**: Use `struct` for small, immutable data containers (e.g., `HeroStats`) to avoid heap allocations and Garbage Collector spikes during combat.
    - **Type Safety**: Use explicit C# types (`int`, `float`, `string`, `enum`, `struct`, `class`). Avoid untyped data containers.
+   - **FSM Orchestrator Pattern**: `TurnBasedCombatEngine` acts as the central FSM orchestrator. Individual `ICombatState` classes should only receive parameters in their constructor that are actually used in `Enter()` or `Exit()`. Avoid passing unused `CombatStateMachine` references to state classes that do not trigger transitions internally.

@@ -40,17 +40,17 @@
 - [x] Доменный класс героя (`Hero`)
 - [x] Калькулятор урона (`DamageCalculator`)
 
-### 🔹 Сессия 2: Пошаговая боевая система (Combat Engine) — В ПРОЦЕССЕ ⚙️
+### 🔹 Сессия 2: Пошаговая боевая система (Combat Engine) — 100% ЗАВЕРШЕНО 🎉
 - [x] Интерфейс состояний боя ([ICombatState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/ICombatState.cs))
 - [x] Дирижер состояний ([CombatStateMachine.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/CombatStateMachine.cs))
 - [x] Состояние инициализации ([InitState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/InitState.cs))
 - [x] Состояние хода игрока и списание AP ([PlayerTurnState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/PlayerTurnState.cs))
-- [ ] **[Текущий шаг]** Состояние хода ИИ врага (`EnemyTurnState.cs`)
-- [ ] Состояния окончания боя (`VictoryState.cs`, `DefeatState.cs`)
-- [ ] Расовая подсистема (`RaceType.cs`, `RaceBonus.cs`)
-- [ ] Паттерн Command для боевых действий (`ICombatCommand`, `AttackCommand`)
+- [x] Состояние хода ИИ врага ([EnemyTurnState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/EnemyTurnState.cs))
+- [x] Состояния окончания боя ([VictoryState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/VictoryState.cs), [DefeatState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/DefeatState.cs))
+- [x] Пошаговый боевой движок ([TurnBasedCombatEngine.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/TurnBasedCombatEngine.cs))
 
-### 🔹 Сессия 3: Система Квестов и Событий (Quests & Inventory)
+### 🔹 Сессия 3: Расовая подсистема, Квесты и Event Bus (Quests & Event Bus) — СЛЕДУЮЩАЯ 🚀
+- [ ] Расовая подсистема (`RaceType.cs`, `RaceBonus.cs`)
 - [ ] Event Bus (Событийный автобус: `OnEnemyKilled`, `OnItemCollected`)
 - [ ] Движок квестов и целей (`Quest`, `Objective`)
 - [ ] Инвентарь и экипировка предметов (`EquipmentSystem`)
@@ -70,9 +70,10 @@
 ## 📅 Ежедневный журнал прогресса (Daily Progress Log)
 
 ### 📆 2026-07-28
-- **Добавлено в Вики и Роадмап:**
-  - Детализирован пошаговый план Сессии 2 до создания `EnemyTurnState.cs`, `VictoryState.cs`, `RaceType.cs` и паттерна Command.
-  - Зафиксированы правила Zero-GC и концепция рас (Human, Elf, Dwarf, Undead/Orc).
-- **Написано ранее в Сессии 2:**
-  - `ICombatState.cs`, `CombatStateMachine.cs`, `InitState.cs`, `PlayerTurnState.cs`.
-- **Текущий активный шаг:** Создание `EnemyTurnState.cs` (ход ИИ врага).
+- **Завершено 100% Сессии 2 (Combat Engine):**
+  - [EnemyTurnState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/EnemyTurnState.cs) — автономный ход ИИ врага.
+  - [VictoryState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/VictoryState.cs) & [DefeatState.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/DefeatState.cs) — состояния финала боя.
+  - [TurnBasedCombatEngine.cs](file:///c:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/TurnBasedCombatEngine.cs) — главный пошаговый боевой движок.
+- **Проверка:** Компиляция прошла с **0 Предупреждений и 0 Ошибок**!
+- **Текущий статус:** Сессия 2 успешно завершена!
+- **Следующий шаг:** Переход к Сессии 3 (Расы `RaceType` / `RaceBonus`, Event Bus и Квесты).

@@ -3,14 +3,15 @@ using FantasyRPG.Core.Stats;
 
 namespace FantasyRPG.Core.Combat
 {
+    /// <summary>
+    /// Состояние инициализации боя. Рассчитывает очередность ходов (Initiative Order) на основе скорости персонажей.
+    /// </summary>
     public class InitState : ICombatState
     {
-        private readonly CombatStateMachine _stateMachine;
         private readonly List<Hero> _units;
 
-        public InitState(CombatStateMachine stateMachine, List<Hero> units)
+        public InitState(List<Hero> units)
         {
-            _stateMachine = stateMachine;
             _units = units;
         }
 
