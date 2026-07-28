@@ -16,6 +16,7 @@
 # Visual Studio / VS Code / Rider temporary files
 .vs/
 .idea/
+.vscode/
 *.csproj
 *.unityproj
 *.sln
