@@ -11,6 +11,7 @@ To prevent "context rot" and optimize token consumption:
 When starting a new chat thread in this workspace:
 - Read `.agents/rules/mentor_rules.md` for interaction/mentorship rules.
 - Read `.agents/rules/architecture.md` for C# & Unity engineering rules.
+- Read `.agents/rules/code_review_rules.md` for Zero-GC, Netcode & Roslyn review checklist.
 - Read `.agents/rules/game_concept.md` for game systems specifications.
 - Read `project_wiki.md` to identify current progress and active tasks.
 
