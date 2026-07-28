@@ -25,3 +25,12 @@ csharp_new_line_before_open_brace = all
 csharp_new_line_before_else = true
 csharp_new_line_before_catch = true
 csharp_new_line_before_finally = true
+
+# Roslyn Diagnostics & Dead Code Analysis (Unused parameters & variables)
+dotnet_diagnostic.IDE0060.severity = error
+dotnet_diagnostic.CS0219.severity = error
+dotnet_diagnostic.CS0168.severity = error
+dotnet_diagnostic.IDE0051.severity = error
+dotnet_diagnostic.IDE0052.severity = error
+dotnet_diagnostic.IDE0005.severity = error
+
