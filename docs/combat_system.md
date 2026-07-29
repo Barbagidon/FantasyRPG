@@ -43,7 +43,7 @@ stateDiagram-v2
    - Состояние ожидания команды от игрока. Проверяет наличие очков `APCost`.
 
 3. **[EnemyTurnState.cs](file:///C:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/EnemyTurnState.cs):**
-   - Автономный ход ИИ врага. Выбирает наиболее уязвимую цель и наносит урон.
+   - Базовый каркас хода врага. На данный момент только выдает очки AP. Полноценный ИИ (Utility AI) и самостоятельный выбор целей будут реализованы в Сессии 3.
 
 4. **[VictoryState.cs](file:///C:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/VictoryState.cs) & [DefeatState.cs](file:///C:/Users/shtil/OneDrive/Desktop/FantasyRPG/Assets/Scripts/Core/Combat/DefeatState.cs):**
    - Завершающие состояния при уничтожении вражеской команды или гибели отряда.
