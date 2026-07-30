@@ -7,14 +7,12 @@ namespace FantasyRPG.Core.Combat
         private readonly Hero _attacker;
         private readonly Hero _target;
         public int APCost { get; private set; }
-        private readonly bool _isCritical;
 
-        public AttackCommand(Hero attacker, Hero target, int apCost, bool isCritical = false)
+        public AttackCommand(Hero attacker, Hero target, int apCost)
         {
             _attacker = attacker;
             _target = target;
             APCost = apCost;
-            _isCritical = isCritical;
         }
 
         public bool CanExecute()
@@ -22,7 +20,8 @@ namespace FantasyRPG.Core.Combat
             return _attacker != null
                 && _target != null
                 && _attacker.Stats.CurrentHealth > 0
-                && _target.Stats.CurrentHealth > 0;
+                && _target.Stats.CurrentHealth > 0
+                && _attacker.CurrentActionPoints >= APCost;
         }
 
         public bool Execute()
@@ -30,7 +29,10 @@ namespace FantasyRPG.Core.Combat
             if (!CanExecute())
                 return false;
 
-            int damage = DamageCalculator.CalculateDamage(_attacker, _target, _isCritical);
+            if (!_attacker.TrySpendAP(APCost))
+                return false;
+
+            int damage = DamageCalculator.CalculateDamage(_attacker, _target);
 
             _target.TakeDamage(damage);
 

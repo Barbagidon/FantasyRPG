@@ -3,7 +3,6 @@ namespace FantasyRPG.Core.Stats
     public readonly struct HeroStats
     {
         public int MaxHealth { get; }
-        public int CurrentHealth { get; }
         public int MaxActionPoints { get; }
         public int BaseAttack { get; }
         public int BaseDefense { get; }
@@ -13,7 +12,6 @@ namespace FantasyRPG.Core.Stats
 
         public HeroStats(
             int maxHealth,
-            int currentHealth,
             int maxActionPoints,
             int baseAttack,
             int baseDefense,
@@ -23,7 +21,6 @@ namespace FantasyRPG.Core.Stats
         )
         {
             MaxHealth = maxHealth;
-            CurrentHealth = currentHealth;
             MaxActionPoints = maxActionPoints;
             BaseAttack = baseAttack;
             BaseDefense = baseDefense;

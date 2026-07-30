@@ -28,7 +28,8 @@ This document specifies the strict code review rules for Unity C#, Clean Archite
 ---
 
 ## 3. Netcode for GameObjects (NGO) Optimization Rule
-- **Bit-Packed Serialization:** Custom enums (e.g. `RaceType`, `WeaponType`, `TurnState`) MUST explicitly specify `: byte` (`enum RaceType : byte`) and be serialized via `FastBufferWriter` / `FastBufferReader`.
+- **Byte-Sized Enums:** Custom enums (e.g. `RaceType`, `WeaponType`, `TurnState`) MUST explicitly specify `: byte` (`enum RaceType : byte`) — this is free and keeps default NGO serialization compact.
+- **Prefer Built-In Serialization:** For a 3-player turn-based game, `NetworkVariable<T>` and RPC parameters with NGO's built-in serialization are sufficient for all current data (positions, HP, AP, turn state). Do NOT hand-roll `FastBufferWriter`/`FastBufferReader` serialization unless a profiler run or a specific non-primitive structure proves the built-in path is actually a bottleneck. Manual bit-packing for a 3-player co-op game is premature optimization until proven otherwise.
 - **Server-Authoritative Validation:** All state-changing actions (spending AP, dealing damage, equipping items) MUST be validated on the Server/Host before mutating domain state.
 - **Throttled Network Variables:** Use minimal `NetworkVariable<T>` properties; prefer RPCs for one-off discrete actions (attacks, turn changes).
 

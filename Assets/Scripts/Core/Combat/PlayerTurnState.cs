@@ -9,27 +9,14 @@ namespace FantasyRPG.Core.Combat
     {
         private readonly Hero _activeHero;
 
-        public int CurrentAP { get; private set; }
-
         public PlayerTurnState(Hero activeHero)
         {
             _activeHero = activeHero;
         }
 
-        public bool TrySpendAP(int apCost)
-        {
-            if (CurrentAP >= apCost)
-            {
-                CurrentAP = CurrentAP - apCost;
-                return true;
-            }
-
-            return false;
-        }
-
         public void Enter()
         {
-            CurrentAP = _activeHero.Stats.MaxActionPoints;
+            _activeHero.ResetActionPoints();
         }
 
         public void Exit() { }

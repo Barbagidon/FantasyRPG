@@ -9,8 +9,6 @@ namespace FantasyRPG.Core.Combat
     {
         private readonly Hero _enemyUnit;
 
-        public int CurrentAP { get; private set; }
-
         public EnemyTurnState(Hero enemyUnit)
         {
             _enemyUnit = enemyUnit;
@@ -18,20 +16,9 @@ namespace FantasyRPG.Core.Combat
 
         public void Enter()
         {
-            CurrentAP = _enemyUnit.Stats.MaxActionPoints;
+            _enemyUnit.ResetActionPoints();
         }
 
         public void Exit() { }
-
-        public bool TrySpendAP(int apCost)
-        {
-            if (CurrentAP >= apCost)
-            {
-                CurrentAP = CurrentAP - apCost;
-                return true;
-            }
-
-            return false;
-        }
     }
 }

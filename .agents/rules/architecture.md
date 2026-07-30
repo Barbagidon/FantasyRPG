@@ -45,7 +45,7 @@ Assets/Scripts/
 6. **3-Player Server-Authoritative Netcode (`FantasyRPG.Network`)**:
    - **Single Source of Truth:** Server/Host validates all actions before state mutation.
    - **State vs Events:** Use `NetworkVariable<T>` for persistent state (HP, `CurrentTurnPlayerId`) and RPCs (`ServerRpc`/`ClientRpc`) for discrete events and animation triggers.
-   - **Byte Serialization:** Custom enums (`RaceType`, `WeaponType`, `TurnState`) MUST be serialized as `byte` or via `FastBufferWriter`/`FastBufferReader`.
+   - **Byte-Sized Enums, Built-In Serialization:** Custom enums (`RaceType`, `WeaponType`, `TurnState`) MUST be `: byte`. Rely on NGO's built-in serialization for `NetworkVariable<T>`/RPC parameters — for a 3-player turn-based game this is sufficient. Manual `FastBufferWriter`/`FastBufferReader` serialization is reserved for cases where profiling proves it necessary, not a default requirement.
 
 7. **MVP (Model-View-Presenter) with Passive View for UI (`FantasyRPG.UI`)**:
    - `View` components (`MonoBehaviour` / UI Toolkit) contain zero business logic.

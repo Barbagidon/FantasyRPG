@@ -4,7 +4,14 @@ namespace FantasyRPG.Core.Stats
 {
     public static class DamageCalculator
     {
-        public static int CalculateDamage(Hero attacker, Hero defender, bool isCritical)
+        private static Random _rng = new Random();
+
+        public static void SetSeed(int seed)
+        {
+            _rng = new Random(seed);
+        }
+
+        public static int CalculateDamage(Hero attacker, Hero defender)
         {
             int weaponDamage =
                 attacker.EquippedWeapon != null ? attacker.EquippedWeapon.BaseDamage : 0;
@@ -12,6 +19,7 @@ namespace FantasyRPG.Core.Stats
             int armorDefense = defender.EquippedArmor != null ? defender.EquippedArmor.Defense : 0;
             int totalDefense = defender.Stats.BaseDefense + armorDefense;
             int baseDamage = Math.Max(1, totalAttack - totalDefense);
+            bool isCritical = _rng.NextDouble() <= attacker.Stats.CritChance;
 
             if (isCritical)
             {
