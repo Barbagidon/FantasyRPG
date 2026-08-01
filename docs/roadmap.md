@@ -45,24 +45,24 @@
 **Готово, когда:** тесты в `Core` зелёные, AP реально тратятся, крит реально бросается, домен компилируется отдельным `asmdef`.
 **Оценка:** 25–40 ч / 2–3 нед.
 
-- [ ] `AttackCommand.Execute()` вызывает `Hero.SpendAP`, `TrySpendAP` из `PlayerTurnState`/`EnemyTurnState` действительно используется
-- [ ] `CritChance` читается в `DamageCalculator` через seeded `Random`, бросок — внутри домена
-- [ ] `HeroStats` очищен: `CurrentHealth` и текущие AP — на `Hero`, `HeroStats` только неизменяемые базовые характеристики
-- [ ] `Assets/Scripts/Core` вынесен в свой `.asmdef`, тестовая сборка ссылается на него
-- [ ] Написаны тесты: `DamageCalculator` (защита, крит), `Hero` (снятие HP, смерть, трата AP), `CombatStateMachine` (смена ходов)
-- [ ] `ICombatCommand` синхронизирован с `docs/combat_system.md` (или документ обновлён по факту кода — что верно, то и остаётся)
-- [ ] Устранён дубль `project_wiki.md` / `docs/README.md` — один портал вики
-- [ ] Все ссылки в docs — относительные пути (`Assets/Scripts/...`), не `file:///C:/...`
-- [ ] `.gitattributes` + Git LFS настроены заранее, до прихода 3D-ассетов
-- [ ] Проект вынесен из OneDrive
-- [ ] `docs/quest_system.md`, `docs/architecture.md` (в части несуществующего) свёрнуты или помечены как черновик, не как факт
-- [ ] Правило проактивной записи выводов в `.agents/rules/mentor_rules.md` переформулировано: документ обновляется после теста/билда, не до
-- [ ] `.agents/rules/code_review_rules.md`, правило 3: смягчить требование `FastBufferWriter`/`FastBufferReader` — оставить `: byte` у энумов как есть, ручную сериализацию оставить только для структур, которые встроенная сериализация NGO не покрывает (для 3 игроков в пошаговой игре достаточно `NetworkVariable<T>` и RPC)
-- [ ] `.agents/rules/game_concept.md` и `.agents/rules/architecture.md`: убрать описание Quest & Rewards Subsystem и Event Bus как уже спроектированных полноценных подсистем — заменить на актуальный урезанный скоуп (события под конкретных потребителей, квестовый движок вырезан)
-- [ ] `docs/quest_system.md`: удалить либо переименовать в `quest_system.deferred.md` с пометкой «не для текущего скоупа» — персистентный мир в стиле Kingdom Come вырезан
-- [ ] Все 82 абсолютные ссылки `file:///C:/Users/shtil/OneDrive/...` во всех .md-файлах разом заменены на относительные пути
+- [x] `AttackCommand.Execute()` вызывает `Hero.TrySpendAP` (не `Hero.SpendAP` — метод называется иначе, чем в исходной формулировке этого пункта) — подтверждено тестами `HeroTests.TrySpendAP_*` и `AttackCommand`/`TurnBasedCombatEngine` теперь читают `Hero.CurrentHealth` напрямую, а не устаревший `Hero.Stats.CurrentHealth` (см. `docs/progress_log.md`, запись 2026-08-01)
+- [x] `CritChance` читается в `DamageCalculator` через seeded `Random` — подтверждено тестом `DamageCalculatorTests.CalculateDamage_GuaranteedCrit_...` (`critChance = 1f`)
+- [x] `HeroStats` очищен: `CurrentHealth` и текущие AP — на `Hero`, `HeroStats` только неизменяемые базовые характеристики — подтверждено чтением кода и зелёной сборкой
+- [x] `Assets/Scripts/Core` вынесен в свой `.asmdef`, тестовая сборка ссылается на него — подтверждено `dotnet build`/`dotnet test` через отдельный `Tests.Core/FantasyRPG.Core.Tests.csproj` (компилирует исходники `Core` напрямую, без Unity — см. пометку ниже) и параллельный `Assets/Tests/Core/FantasyRPG.Core.Tests.asmdef`, ссылающийся на `FantasyRPG.Core`. **Не проверено:** сборка `FantasyRPG.Core.Tests.asmdef` именно внутри Unity Editor — на этом компе Unity не установлен, нужна проверка на домашнем ПК
+- [x] Написаны тесты: `DamageCalculator` (защита, крит), `Hero` (снятие HP, смерть, трата AP), `TurnBasedCombatEngine.AdvanceTurn` (смена хода) — 7/7 зелёных в `dotnet test`. (Тестировался `TurnBasedCombatEngine`, а не `CombatStateMachine` напрямую — сам `CombatStateMachine.ChangeState` слишком тривиален, логика смены хода живёт в движке)
+- [x] `ICombatCommand` синхронизирован с `docs/combat_system.md` — подтверждено чтением `ICombatCommand.cs` (только `CanExecute()`/`Execute()`, без `APCost`) — совпадает с диаграммой в доке
+- [x] Устранён дубль `project_wiki.md` / `docs/README.md` — один портал вики — подтверждено чтением обоих файлов
+- [x] Все ссылки в docs — относительные пути (`Assets/Scripts/...`), не `file:///C:/...` — подтверждено `grep -r "file:///"` по `docs/`, `.agents/`: остались только упоминания самого правила/конвенции и исторические записи в `progress_log.md`, ни одной реальной битой ссылки
+- [ ] `.gitattributes` + Git LFS настроены заранее, до прихода 3D-ассетов — не сделано: `.gitattributes` отсутствует, `git-lfs` не установлен (проверено на этом компе)
+- [ ] Проект вынесен из OneDrive — не проверяемо с этого компа (репозиторий открыт на рабочем Mac, исходная проблема была на домашнем Windows-ПК с OneDrive) — уточнить у пользователя состояние на домашнем ПК
+- [x] `docs/quest_system.md`, `docs/architecture.md` (в части несуществующего) свёрнуты или помечены как черновик, не как факт — `quest_system.md` содержит явный disclaimer «ОТЛОЖЕНО», `architecture.md` не описывает несуществующих подсистем
+- [x] Правило проактивной записи выводов в `.agents/rules/mentor_rules.md` переформулировано: документ обновляется после теста/билда, не до — подтверждено чтением §10
+- [x] `.agents/rules/code_review_rules.md`, правило 3: смягчить требование `FastBufferWriter`/`FastBufferReader` — подтверждено чтением файла, формулировка уже смягчена
+- [x] `.agents/rules/game_concept.md` и `.agents/rules/architecture.md`: убрать описание Quest & Rewards Subsystem и Event Bus как уже спроектированных полноценных подсистем — подтверждено чтением обоих файлов, упоминаний нет
+- [x] `docs/quest_system.md`: удалить либо переименовать в `quest_system.deferred.md` с пометкой «не для текущего скоупа» — файл переименован в `docs/quest_system.deferred.md` (2026-08-01), disclaimer внутри уже был
+- [x] Все 82 абсолютные ссылки `file:///C:/Users/shtil/OneDrive/...` во всех .md-файлах разом заменены на относительные пути — подтверждено тем же `grep`, что и выше
 
-*Задел на сеть (делать здесь, дёшево сейчас, дорого потом):*
+*Задел на сеть (делать здесь, дёшево сейчас, дорого потом) — ничего из этого блока ещё не сделано:*
 - [ ] Юниты (герои) идентифицируются по `ID`, не по прямой ссылке на объект
 - [ ] Команды (`ICombatCommand`) — сериализуемые данные, а не объекты с ссылками на `Hero`
 - [ ] Модель владения: у юнита есть `OwnerId`; в коопе игроки сами распределяют героев между собой (не обязательно 1:1 — при двух игроках один держит двух); соло — все юниты у хоста
