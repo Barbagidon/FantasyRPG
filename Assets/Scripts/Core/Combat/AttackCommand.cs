@@ -19,8 +19,8 @@ namespace FantasyRPG.Core.Combat
         {
             return _attacker != null
                 && _target != null
-                && _attacker.Stats.CurrentHealth > 0
-                && _target.Stats.CurrentHealth > 0
+                && _attacker.CurrentHealth > 0
+                && _target.CurrentHealth > 0
                 && _attacker.CurrentActionPoints >= APCost;
         }
 

@@ -27,9 +27,7 @@ namespace FantasyRPG.Core.Combat
             _playerTeam = playerTeam;
             _enemyTeam = enemyTeam;
             CurrentTurnIndex = 0;
-            _turnOrder = new List<Hero>();
-            _turnOrder.AddRange(_playerTeam);
-            _turnOrder.AddRange(_enemyTeam);
+            _turnOrder = [.. _playerTeam, .. _enemyTeam];
         }
 
         public void StartCombat()
@@ -53,13 +51,13 @@ namespace FantasyRPG.Core.Combat
 
         public bool CheckCombatEnd()
         {
-            if (_enemyTeam.TrueForAll(e => e.Stats.CurrentHealth <= 0))
+            if (_enemyTeam.TrueForAll(e => e.CurrentHealth <= 0))
             {
                 StateMachine.ChangeState(new VictoryState());
                 return true;
             }
 
-            if (_playerTeam.TrueForAll(p => p.Stats.CurrentHealth <= 0))
+            if (_playerTeam.TrueForAll(p => p.CurrentHealth <= 0))
             {
                 StateMachine.ChangeState(new DefeatState());
                 return true;
@@ -76,9 +74,10 @@ namespace FantasyRPG.Core.Combat
             do
             {
                 CurrentTurnIndex = (CurrentTurnIndex + 1) % _turnOrder.Count;
-            } while (ActiveUnit != null && ActiveUnit.Stats.CurrentHealth <= 0);
+            } while (ActiveUnit != null && ActiveUnit.CurrentHealth <= 0);
 
             SetTurnStateForActiveUnit();
         }
     }
 }
+

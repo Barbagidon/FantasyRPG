@@ -15,6 +15,7 @@
 ExportedObj/
 .consulo/
 *.csproj
+!/Tests.Core/*.csproj
 *.unityproj
 *.sln
 *.suo
