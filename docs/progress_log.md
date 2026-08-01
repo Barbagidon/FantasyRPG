@@ -4,6 +4,14 @@
 
 ---
 
+## 📆 2026-08-02 — Закрыт пробел code review: тесты на `CheckCombatEnd()` (Веха 0)
+
+### 🎯 Выполненные Задачи:
+1. **Закрыт пробел, найденный при код-ревью:** `TurnBasedCombatEngine.CheckCombatEnd()` был приоритетной целью по `code_review_rules.md` §9, но не имел покрытия. Добавлены два теста в `TurnBasedCombatEngineTests`: `CheckCombatEnd_AllEnemiesDead_ReturnsTrueAndSetsVictoryState` и `CheckCombatEnd_AllPlayersDead_ReturnsTrueAndSetsDefeatState` — оба проверяют возвращаемое значение и итоговый тип `StateMachine.CurrentState` (`VictoryState`/`DefeatState`). `dotnet test` — 9/9 зелёных.
+2. **Правило ментора:** в `.agents/rules/mentor_rules.md` §2 добавлено явное правило — проактивно предлагать улучшения именования локальных переменных при код-ревью, даже как некритичную ремарку не по теме основного разбора. Подтверждено пользователем как желаемое поведение.
+
+---
+
 ## 📆 2026-08-01 — Тесты домена и билд-гейт без Unity (Веха 0)
 
 ### 🎯 Выполненные Задачи:
