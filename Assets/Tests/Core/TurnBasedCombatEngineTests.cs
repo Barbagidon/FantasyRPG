@@ -17,7 +17,8 @@ namespace FantasyRPG.Core.Tests
                 maxActionPoints: 10,
                 baseAttack: 10,
                 baseDefense: 0,
-                speed: 5,
+                initiative: 5,
+                moveSpeed: 5,
                 critChance: 1f,
                 critMultiplier: 2f
             );
@@ -26,7 +27,8 @@ namespace FantasyRPG.Core.Tests
                 maxActionPoints: 10,
                 baseAttack: 0,
                 baseDefense: 0,
-                speed: 5,
+                initiative: 5,
+                moveSpeed: 5,
                 critChance: 0f,
                 critMultiplier: 2f
             );
@@ -53,7 +55,8 @@ namespace FantasyRPG.Core.Tests
                 maxActionPoints: 10,
                 baseAttack: 10,
                 baseDefense: 0,
-                speed: 5,
+                initiative: 5,
+                moveSpeed: 5,
                 critChance: 1f,
                 critMultiplier: 2f
             );
@@ -62,7 +65,8 @@ namespace FantasyRPG.Core.Tests
                 maxActionPoints: 10,
                 baseAttack: 0,
                 baseDefense: 0,
-                speed: 5,
+                initiative: 5,
+                moveSpeed: 5,
                 critChance: 0f,
                 critMultiplier: 2f
             );
@@ -90,7 +94,8 @@ namespace FantasyRPG.Core.Tests
                 maxActionPoints: 10,
                 baseAttack: 10,
                 baseDefense: 0,
-                speed: 5,
+                initiative: 5,
+                moveSpeed: 5,
                 critChance: 1f,
                 critMultiplier: 2f
             );
@@ -99,7 +104,8 @@ namespace FantasyRPG.Core.Tests
                 maxActionPoints: 10,
                 baseAttack: 0,
                 baseDefense: 0,
-                speed: 5,
+                initiative: 5,
+                moveSpeed: 5,
                 critChance: 0f,
                 critMultiplier: 2f
             );

@@ -6,7 +6,10 @@ namespace FantasyRPG.Core.Stats
         public int MaxActionPoints { get; }
         public int BaseAttack { get; }
         public int BaseDefense { get; }
-        public int Speed { get; }
+        public int Initiative { get; }
+
+        // Потребитель — MoveCommand (Веха 1), сейчас не используется.
+        public int MoveSpeed { get; }
         public float CritChance { get; }
         public float CritMultiplier { get; }
 
@@ -15,7 +18,8 @@ namespace FantasyRPG.Core.Stats
             int maxActionPoints,
             int baseAttack,
             int baseDefense,
-            int speed,
+            int initiative,
+            int moveSpeed,
             float critChance,
             float critMultiplier
         )
@@ -24,9 +28,11 @@ namespace FantasyRPG.Core.Stats
             MaxActionPoints = maxActionPoints;
             BaseAttack = baseAttack;
             BaseDefense = baseDefense;
-            Speed = speed;
+            Initiative = initiative;
+            MoveSpeed = moveSpeed;
             CritChance = critChance;
             CritMultiplier = critMultiplier;
         }
     }
 }
+

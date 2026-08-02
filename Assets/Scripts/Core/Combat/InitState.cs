@@ -17,9 +17,10 @@ namespace FantasyRPG.Core.Combat
 
         public void Enter()
         {
-            _units.Sort((a, b) => b.Stats.Speed.CompareTo(a.Stats.Speed));
+            _units.Sort((a, b) => b.Stats.Initiative.CompareTo(a.Stats.Initiative));
         }
 
         public void Exit() { }
     }
 }
+
