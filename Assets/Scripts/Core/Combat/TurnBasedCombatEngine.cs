@@ -27,7 +27,8 @@ namespace FantasyRPG.Core.Combat
             _playerTeam = playerTeam;
             _enemyTeam = enemyTeam;
             CurrentTurnIndex = 0;
-            _turnOrder = [.. _playerTeam, .. _enemyTeam];
+            _turnOrder = new List<Hero>(_playerTeam);
+            _turnOrder.AddRange(_enemyTeam);
         }
 
         public void StartCombat()

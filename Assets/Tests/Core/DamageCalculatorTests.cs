@@ -31,8 +31,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero attacker = new("Attacker", attackerStats);
-            Hero defender = new("Defender", defenderStats);
+            Hero attacker = new(0, "Attacker", attackerStats);
+            Hero defender = new(1, "Defender", defenderStats);
 
             int actual = DamageCalculator.CalculateDamage(attacker, defender);
 
@@ -63,8 +63,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero attacker = new("Attacker", attackerStats);
-            Hero defender = new("Defender", defenderStats);
+            Hero attacker = new(0, "Attacker", attackerStats);
+            Hero defender = new(1, "Defender", defenderStats);
 
             int actual = DamageCalculator.CalculateDamage(attacker, defender);
 

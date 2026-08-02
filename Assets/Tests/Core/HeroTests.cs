@@ -23,7 +23,7 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero hero = new("Attacker", stats);
+            Hero hero = new(0, "Attacker", stats);
             bool result = hero.TrySpendAP(6);
 
             ClassicAssert.IsFalse(result);
@@ -46,7 +46,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 0f,
                 critMultiplier: 2f
             );
-            Hero hero = new("Attacker", stats);
+            Hero hero = new(0, "Attacker", stats);
 
             bool result = hero.TrySpendAP(cost);
 
@@ -70,7 +70,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 0f,
                 critMultiplier: 2f
             );
-            Hero hero = new("Defender", stats);
+            Hero hero = new(1, "Defender", stats);
 
             hero.TakeDamage(damage);
 
@@ -93,7 +93,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 0f,
                 critMultiplier: 2f
             );
-            Hero hero = new("Defender", stats);
+            Hero hero = new(1, "Defender", stats);
 
             hero.TakeDamage(lethalDamage);
 
