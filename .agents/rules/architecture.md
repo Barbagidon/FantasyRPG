@@ -31,6 +31,7 @@ Assets/Scripts/
    - **Memory Efficiency (GC Optimization)**: Use `struct` for small, immutable data containers (e.g., `HeroStats`) to avoid heap allocations and Garbage Collector spikes during combat.
    - **Type Safety**: Use explicit C# types (`int`, `float`, `string`, `enum`, `struct`, `class`). Avoid untyped data containers.
    - **FSM Orchestrator Pattern**: `TurnBasedCombatEngine` acts as the central FSM orchestrator. Individual `ICombatState` classes should only receive parameters in their constructor that are actually used in `Enter()` or `Exit()`.
+   - **Target-Typed `new()` (Modern C# Syntax)**: Default to the C# 9+ target-typed `new()` expression (`HeroStats stats = new(...)`) instead of repeating the type name (`HeroStats stats = new HeroStats(...)`) whenever the declared type on the left-hand side (a field, local variable, or property) already makes the target type unambiguous. This matches Microsoft's own modern C# convention and avoids redundant type repetition. **Exception:** keep the type explicit (`new PlayerTurnState(...)`) when constructing a concrete type that is passed into an interface- or base-typed parameter/variable (e.g. `StateMachine.ChangeState(new PlayerTurnState(ActiveUnit))` where `ChangeState` takes `ICombatState`) — target-typed `new()` cannot infer a concrete type from an interface/abstract target.
 
 ## Advanced Architectural Design Patterns
 
