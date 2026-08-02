@@ -79,6 +79,11 @@ namespace FantasyRPG.Core.Combat
 
             SetTurnStateForActiveUnit();
         }
+
+        public Hero GetUnitById(int id)
+        {
+            return _turnOrder.Find(p => p.Id == id);
+        }
     }
 }
 

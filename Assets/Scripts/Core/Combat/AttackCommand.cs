@@ -4,24 +4,30 @@ namespace FantasyRPG.Core.Combat
 {
     public class AttackCommand : ICombatCommand
     {
-        private readonly Hero _attacker;
-        private readonly Hero _target;
+        private readonly int _attackerId;
+        private readonly int _targetId;
+
+        private readonly TurnBasedCombatEngine _engine;
         public int APCost { get; private set; }
 
-        public AttackCommand(Hero attacker, Hero target, int apCost)
+        public AttackCommand(int attackerId, int targetId, int apCost, TurnBasedCombatEngine engine)
         {
-            _attacker = attacker;
-            _target = target;
+            _attackerId = attackerId;
+            _targetId = targetId;
             APCost = apCost;
+            _engine = engine;
         }
 
         public bool CanExecute()
         {
-            return _attacker != null
-                && _target != null
-                && _attacker.CurrentHealth > 0
-                && _target.CurrentHealth > 0
-                && _attacker.CurrentActionPoints >= APCost;
+            Hero attacker = _engine.GetUnitById(_attackerId);
+            Hero target = _engine.GetUnitById(_targetId);
+
+            return attacker != null
+                && target != null
+                && attacker.CurrentHealth > 0
+                && target.CurrentHealth > 0
+                && attacker.CurrentActionPoints >= APCost;
         }
 
         public bool Execute()
@@ -29,14 +35,18 @@ namespace FantasyRPG.Core.Combat
             if (!CanExecute())
                 return false;
 
-            if (!_attacker.TrySpendAP(APCost))
+            Hero attacker = _engine.GetUnitById(_attackerId);
+            Hero target = _engine.GetUnitById(_targetId);
+
+            if (!attacker.TrySpendAP(APCost))
                 return false;
 
-            int damage = DamageCalculator.CalculateDamage(_attacker, _target);
+            int damage = DamageCalculator.CalculateDamage(attacker, target);
 
-            _target.TakeDamage(damage);
+            target.TakeDamage(damage);
 
             return true;
         }
     }
 }
+

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using FantasyRPG.Core.Combat;
 using FantasyRPG.Core.Stats;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace FantasyRPG.Core.Tests
 {
@@ -41,7 +40,7 @@ namespace FantasyRPG.Core.Tests
             TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
             engine.StartCombat();
             engine.AdvanceTurn();
-            ClassicAssert.AreEqual(enemyHero, engine.ActiveUnit);
+            Assert.AreEqual(enemyHero, engine.ActiveUnit);
         }
 
         [Test]
@@ -79,8 +78,8 @@ namespace FantasyRPG.Core.Tests
             TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
             enemyHero.TakeDamage(enemyDamage);
             bool didCombatEnd = engine.CheckCombatEnd();
-            ClassicAssert.IsTrue(didCombatEnd);
-            ClassicAssert.IsInstanceOf<VictoryState>(engine.StateMachine.CurrentState);
+            Assert.IsTrue(didCombatEnd);
+            Assert.IsInstanceOf<VictoryState>(engine.StateMachine.CurrentState);
         }
 
         [Test]
@@ -118,8 +117,82 @@ namespace FantasyRPG.Core.Tests
             TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
             playerHero.TakeDamage(playerDamage);
             bool didCombatEnd = engine.CheckCombatEnd();
-            ClassicAssert.IsTrue(didCombatEnd);
-            ClassicAssert.IsInstanceOf<DefeatState>(engine.StateMachine.CurrentState);
+            Assert.IsTrue(didCombatEnd);
+            Assert.IsInstanceOf<DefeatState>(engine.StateMachine.CurrentState);
+        }
+
+        [Test]
+        public void GetUnitById_ExistingId_ReturnsMatchingHero()
+        {
+            const int playerId = 0;
+            const int enemyId = 1;
+
+            HeroStats attackerStats = new(
+                maxHealth: 20,
+                maxActionPoints: 10,
+                baseAttack: 10,
+                baseDefense: 0,
+                initiative: 5,
+                moveSpeed: 5,
+                critChance: 1f,
+                critMultiplier: 2f
+            );
+            HeroStats defenderStats = new(
+                maxHealth: 20,
+                maxActionPoints: 10,
+                baseAttack: 0,
+                baseDefense: 0,
+                initiative: 5,
+                moveSpeed: 5,
+                critChance: 0f,
+                critMultiplier: 2f
+            );
+
+            Hero playerHero = new(playerId, "Attacker", attackerStats);
+            Hero enemyHero = new(enemyId, "Defender", defenderStats);
+            List<Hero> playerTeam = new() { playerHero };
+            List<Hero> enemyTeam = new() { enemyHero };
+
+            TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
+            Assert.AreEqual(engine.GetUnitById(playerId), playerHero);
+        }
+
+        [Test]
+        public void GetUnitById_UnknownId_ReturnsNull()
+        {
+            const int playerId = 0;
+            const int enemyId = 1;
+            const int wrongId = 2;
+
+            HeroStats attackerStats = new(
+                maxHealth: 20,
+                maxActionPoints: 10,
+                baseAttack: 10,
+                baseDefense: 0,
+                initiative: 5,
+                moveSpeed: 5,
+                critChance: 1f,
+                critMultiplier: 2f
+            );
+            HeroStats defenderStats = new(
+                maxHealth: 20,
+                maxActionPoints: 10,
+                baseAttack: 0,
+                baseDefense: 0,
+                initiative: 5,
+                moveSpeed: 5,
+                critChance: 0f,
+                critMultiplier: 2f
+            );
+
+            Hero playerHero = new(playerId, "Attacker", attackerStats);
+            Hero enemyHero = new(enemyId, "Defender", defenderStats);
+            List<Hero> playerTeam = new() { playerHero };
+            List<Hero> enemyTeam = new() { enemyHero };
+
+            TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
+            Assert.IsNull(engine.GetUnitById(wrongId));
         }
     }
 }
+

@@ -4,6 +4,16 @@
 
 ---
 
+## 📆 2026-08-03 — ICombatCommand на ID, GetUnitById, фикс NUnit 3 vs ClassicAssert (Веха 0, сетевой задел)
+
+### 🎯 Выполненные Задачи:
+1. **`TurnBasedCombatEngine.GetUnitById(int id)`** — резолвер: ищет юнита в `_turnOrder` по `Id` (`List<Hero>.Find`), возвращает `Hero` или `null`. Покрыт двумя тестами: найден / не найден (`GetUnitById_ExistingId_ReturnsMatchingHero`, `GetUnitById_UnknownId_ReturnsNull`).
+2. **`AttackCommand` переведён на ID вместо прямых ссылок на `Hero`** (`architecture.md` §5): поля `_attacker`/`_target` заменены на `_attackerId`/`_targetId` + ссылка на `TurnBasedCombatEngine` для резолва через `GetUnitById` внутри `CanExecute()`/`Execute()`. Это второй закрытый пункт сетевого задела (после `Hero.Id`) — закрывает и первый пункт целиком, т.к. `Hero.Id`/`GetUnitById` сами по себе не имели потребителя до этого шага. Новый `Assets/Tests/Core/AttackCommandTests.cs`: happy path (`Execute_ValidAttack_DealsDamageAndSpendsAP` — урон и трата AP) и негативный кейс (`CanExecute_InsufficientAP_ReturnsFalse`).
+3. **Найден и закрыт риск несовместимости ассертов с Unity Test Framework:** по наводке пользователя (получена от агента на компе с установленным Unity) и подтверждено веб-поиском — Unity Test Framework использует собственный пакет `com.unity.ext.nunit`, основанный на **NUnit 3.5** (Unity не проапгрейдила выше этой версии). В NUnit 3.x классические ассерты (`Assert.AreEqual`, `Assert.IsTrue`, `Assert.IsNull`, `Assert.IsInstanceOf<T>`) — часть публичного `Assert`; их вынесли в `NUnit.Framework.Legacy.ClassicAssert` только в NUnit 4.0. Поскольку `Assets/Tests/Core/**/*.cs` компилируется и Unity (NUnit 3.5), и `Tests.Core/FantasyRPG.Core.Tests.csproj` (`dotnet build`), пакет `NUnit` в `Tests.Core.csproj` понижен с `4.2.2` до `3.14.0`, все `ClassicAssert.*`/`using NUnit.Framework.Legacy;` заменены на прямой `Assert.*` во всех 4 тестовых файлах. Правило зафиксировано в `code_review_rules.md` §9.
+4. `dotnet test` — 13/13 зелёных, `dotnet build` — 0 предупреждений/ошибок.
+
+---
+
 ## 📆 2026-08-02 — Hero.Id + ограничение C# 9 для Core (Веха 0, сетевой задел)
 
 ### 🎯 Выполненные Задачи:

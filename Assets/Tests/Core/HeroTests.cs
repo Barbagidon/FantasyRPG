@@ -1,6 +1,5 @@
 using FantasyRPG.Core.Stats;
 using NUnit.Framework;
-using NUnit.Framework.Legacy;
 
 namespace FantasyRPG.Core.Tests
 {
@@ -26,8 +25,8 @@ namespace FantasyRPG.Core.Tests
             Hero hero = new(0, "Attacker", stats);
             bool result = hero.TrySpendAP(6);
 
-            ClassicAssert.IsFalse(result);
-            ClassicAssert.AreEqual(maxActionPoints, hero.CurrentActionPoints);
+            Assert.IsFalse(result);
+            Assert.AreEqual(maxActionPoints, hero.CurrentActionPoints);
         }
 
         [Test]
@@ -50,8 +49,8 @@ namespace FantasyRPG.Core.Tests
 
             bool result = hero.TrySpendAP(cost);
 
-            ClassicAssert.IsTrue(result);
-            ClassicAssert.AreEqual(maxActionPoints - cost, hero.CurrentActionPoints);
+            Assert.IsTrue(result);
+            Assert.AreEqual(maxActionPoints - cost, hero.CurrentActionPoints);
         }
 
         [Test]
@@ -74,7 +73,7 @@ namespace FantasyRPG.Core.Tests
 
             hero.TakeDamage(damage);
 
-            ClassicAssert.AreEqual(maxHealth - damage, hero.CurrentHealth);
+            Assert.AreEqual(maxHealth - damage, hero.CurrentHealth);
         }
 
         [Test]
@@ -97,7 +96,7 @@ namespace FantasyRPG.Core.Tests
 
             hero.TakeDamage(lethalDamage);
 
-            ClassicAssert.AreEqual(0, hero.CurrentHealth);
+            Assert.AreEqual(0, hero.CurrentHealth);
         }
     }
 }

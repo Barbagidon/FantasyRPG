@@ -1,18 +1,25 @@
+using System.Collections.Generic;
+using FantasyRPG.Core.Combat;
 using FantasyRPG.Core.Stats;
 using NUnit.Framework;
 
 namespace FantasyRPG.Core.Tests
 {
     [TestFixture]
-    public class DamageCalculatorTests
+    public class AttackCommandTests
     {
         [Test]
-        public void CalculateDamage_NoCrit_ReturnsAttackMinusDefense()
+        public void Execute_ValidAttack_DealsDamageAndSpendsAP()
         {
+            const int maxActionPoints = 10;
+            const int baseAttack = 10;
+            const int maxHealth = 20;
+            const int apCost = maxActionPoints - 5;
+
             HeroStats attackerStats = new(
                 maxHealth: 20,
-                maxActionPoints: 10,
-                baseAttack: 10,
+                maxActionPoints,
+                baseAttack,
                 baseDefense: 0,
                 initiative: 5,
                 moveSpeed: 5,
@@ -20,7 +27,7 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
             HeroStats defenderStats = new(
-                maxHealth: 20,
+                maxHealth,
                 maxActionPoints: 10,
                 baseAttack: 0,
                 baseDefense: 0,
@@ -33,22 +40,31 @@ namespace FantasyRPG.Core.Tests
             Hero attacker = new(0, "Attacker", attackerStats);
             Hero defender = new(1, "Defender", defenderStats);
 
-            int actual = DamageCalculator.CalculateDamage(attacker, defender);
+            List<Hero> playerTeam = new() { attacker };
+            List<Hero> enemyTeam = new() { defender };
 
-            Assert.AreEqual(10, actual);
+            TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
+            AttackCommand cmd = new(attacker.Id, defender.Id, apCost, engine);
+            bool result = cmd.Execute();
+            Assert.IsTrue(result);
+            Assert.AreEqual(maxHealth - baseAttack, defender.CurrentHealth);
+            Assert.AreEqual(maxActionPoints - (apCost), attacker.CurrentActionPoints);
         }
 
         [Test]
-        public void CalculateDamage_GuaranteedCrit_ReturnsBaseDamageTimesCritMultiplier()
+        public void CanExecute_InsufficientAP_ReturnsFalse()
         {
+            const int maxActionPoints = 10;
+            const int apCost = maxActionPoints + 5;
+
             HeroStats attackerStats = new(
                 maxHealth: 20,
-                maxActionPoints: 10,
+                maxActionPoints,
                 baseAttack: 10,
                 baseDefense: 0,
                 initiative: 5,
                 moveSpeed: 5,
-                critChance: 1f,
+                critChance: 0f,
                 critMultiplier: 2f
             );
             HeroStats defenderStats = new(
@@ -65,9 +81,13 @@ namespace FantasyRPG.Core.Tests
             Hero attacker = new(0, "Attacker", attackerStats);
             Hero defender = new(1, "Defender", defenderStats);
 
-            int actual = DamageCalculator.CalculateDamage(attacker, defender);
+            List<Hero> playerTeam = new() { attacker };
+            List<Hero> enemyTeam = new() { defender };
 
-            Assert.AreEqual(20, actual);
+            TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
+            AttackCommand cmd = new(attacker.Id, defender.Id, apCost, engine);
+            bool result = cmd.CanExecute();
+            Assert.IsFalse(result);
         }
     }
 }
