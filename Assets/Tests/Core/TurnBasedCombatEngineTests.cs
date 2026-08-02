@@ -12,7 +12,7 @@ namespace FantasyRPG.Core.Tests
         [Test]
         public void AdvanceTurn_SingleAliveUnitEachSide_SwitchesActiveUnitToEnemy()
         {
-            HeroStats attackerStats = new HeroStats(
+            HeroStats attackerStats = new(
                 maxHealth: 20,
                 maxActionPoints: 10,
                 baseAttack: 10,
@@ -21,7 +21,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 1f,
                 critMultiplier: 2f
             );
-            HeroStats defenderStats = new HeroStats(
+            HeroStats defenderStats = new(
                 maxHealth: 20,
                 maxActionPoints: 10,
                 baseAttack: 0,
@@ -31,12 +31,12 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero playerHero = new Hero("Attacker", attackerStats);
-            Hero enemyHero = new Hero("Defender", defenderStats);
-            List<Hero> playerTeam = new List<Hero> { playerHero };
-            List<Hero> enemyTeam = new List<Hero> { enemyHero };
+            Hero playerHero = new("Attacker", attackerStats);
+            Hero enemyHero = new("Defender", defenderStats);
+            List<Hero> playerTeam = new() { playerHero };
+            List<Hero> enemyTeam = new() { enemyHero };
 
-            TurnBasedCombatEngine engine = new TurnBasedCombatEngine(playerTeam, enemyTeam);
+            TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
             engine.StartCombat();
             engine.AdvanceTurn();
             ClassicAssert.AreEqual(enemyHero, engine.ActiveUnit);
@@ -48,7 +48,7 @@ namespace FantasyRPG.Core.Tests
             const int enemyHealth = 20;
             const int enemyDamage = enemyHealth + 1;
 
-            HeroStats attackerStats = new HeroStats(
+            HeroStats attackerStats = new(
                 maxHealth: 20,
                 maxActionPoints: 10,
                 baseAttack: 10,
@@ -57,7 +57,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 1f,
                 critMultiplier: 2f
             );
-            HeroStats defenderStats = new HeroStats(
+            HeroStats defenderStats = new(
                 maxHealth: enemyHealth,
                 maxActionPoints: 10,
                 baseAttack: 0,
@@ -67,12 +67,12 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero playerHero = new Hero("Attacker", attackerStats);
-            Hero enemyHero = new Hero("Defender", defenderStats);
-            List<Hero> playerTeam = new List<Hero> { playerHero };
-            List<Hero> enemyTeam = new List<Hero> { enemyHero };
+            Hero playerHero = new("Attacker", attackerStats);
+            Hero enemyHero = new("Defender", defenderStats);
+            List<Hero> playerTeam = new() { playerHero };
+            List<Hero> enemyTeam = new() { enemyHero };
 
-            TurnBasedCombatEngine engine = new TurnBasedCombatEngine(playerTeam, enemyTeam);
+            TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
             enemyHero.TakeDamage(enemyDamage);
             bool didCombatEnd = engine.CheckCombatEnd();
             ClassicAssert.IsTrue(didCombatEnd);
@@ -85,7 +85,7 @@ namespace FantasyRPG.Core.Tests
             const int playerHealth = 20;
             const int playerDamage = playerHealth + 1;
 
-            HeroStats attackerStats = new HeroStats(
+            HeroStats attackerStats = new(
                 maxHealth: playerHealth,
                 maxActionPoints: 10,
                 baseAttack: 10,
@@ -94,7 +94,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 1f,
                 critMultiplier: 2f
             );
-            HeroStats defenderStats = new HeroStats(
+            HeroStats defenderStats = new(
                 maxHealth: 20,
                 maxActionPoints: 10,
                 baseAttack: 0,
@@ -104,12 +104,12 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero playerHero = new Hero("Attacker", attackerStats);
-            Hero enemyHero = new Hero("Defender", defenderStats);
-            List<Hero> playerTeam = new List<Hero> { playerHero };
-            List<Hero> enemyTeam = new List<Hero> { enemyHero };
+            Hero playerHero = new("Attacker", attackerStats);
+            Hero enemyHero = new("Defender", defenderStats);
+            List<Hero> playerTeam = new() { playerHero };
+            List<Hero> enemyTeam = new() { enemyHero };
 
-            TurnBasedCombatEngine engine = new TurnBasedCombatEngine(playerTeam, enemyTeam);
+            TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
             playerHero.TakeDamage(playerDamage);
             bool didCombatEnd = engine.CheckCombatEnd();
             ClassicAssert.IsTrue(didCombatEnd);
@@ -117,4 +117,3 @@ namespace FantasyRPG.Core.Tests
         }
     }
 }
-

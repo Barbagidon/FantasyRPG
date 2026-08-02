@@ -4,11 +4,11 @@ namespace FantasyRPG.Core.Stats
 {
     public static class DamageCalculator
     {
-        private static Random _rng = new Random();
+        private static Random _rng = new();
 
         public static void SetSeed(int seed)
         {
-            _rng = new Random(seed);
+            _rng = new(seed);
         }
 
         public static int CalculateDamage(Hero attacker, Hero defender)
@@ -29,3 +29,4 @@ namespace FantasyRPG.Core.Stats
         }
     }
 }
+

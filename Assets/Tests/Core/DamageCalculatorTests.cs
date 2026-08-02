@@ -10,7 +10,7 @@ namespace FantasyRPG.Core.Tests
         [Test]
         public void CalculateDamage_NoCrit_ReturnsAttackMinusDefense()
         {
-            HeroStats attackerStats = new HeroStats(
+            HeroStats attackerStats = new(
                 maxHealth: 20,
                 maxActionPoints: 10,
                 baseAttack: 10,
@@ -19,7 +19,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 0f,
                 critMultiplier: 2f
             );
-            HeroStats defenderStats = new HeroStats(
+            HeroStats defenderStats = new(
                 maxHealth: 20,
                 maxActionPoints: 10,
                 baseAttack: 0,
@@ -29,8 +29,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero attacker = new Hero("Attacker", attackerStats);
-            Hero defender = new Hero("Defender", defenderStats);
+            Hero attacker = new("Attacker", attackerStats);
+            Hero defender = new("Defender", defenderStats);
 
             int actual = DamageCalculator.CalculateDamage(attacker, defender);
 
@@ -40,7 +40,7 @@ namespace FantasyRPG.Core.Tests
         [Test]
         public void CalculateDamage_GuaranteedCrit_ReturnsBaseDamageTimesCritMultiplier()
         {
-            HeroStats attackerStats = new HeroStats(
+            HeroStats attackerStats = new(
                 maxHealth: 20,
                 maxActionPoints: 10,
                 baseAttack: 10,
@@ -49,7 +49,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 1f,
                 critMultiplier: 2f
             );
-            HeroStats defenderStats = new HeroStats(
+            HeroStats defenderStats = new(
                 maxHealth: 20,
                 maxActionPoints: 10,
                 baseAttack: 0,
@@ -59,8 +59,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero attacker = new Hero("Attacker", attackerStats);
-            Hero defender = new Hero("Defender", defenderStats);
+            Hero attacker = new("Attacker", attackerStats);
+            Hero defender = new("Defender", defenderStats);
 
             int actual = DamageCalculator.CalculateDamage(attacker, defender);
 

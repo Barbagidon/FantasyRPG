@@ -23,7 +23,7 @@ namespace FantasyRPG.Core.Combat
 
         public TurnBasedCombatEngine(List<Hero> playerTeam, List<Hero> enemyTeam)
         {
-            StateMachine = new CombatStateMachine();
+            StateMachine = new();
             _playerTeam = playerTeam;
             _enemyTeam = enemyTeam;
             CurrentTurnIndex = 0;
@@ -33,7 +33,7 @@ namespace FantasyRPG.Core.Combat
         public void StartCombat()
         {
             CurrentTurnIndex = 0;
-            InitState initState = new InitState(_turnOrder);
+            InitState initState = new(_turnOrder);
             StateMachine.ChangeState(initState);
             SetTurnStateForActiveUnit();
         }

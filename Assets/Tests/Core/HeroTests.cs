@@ -10,10 +10,9 @@ namespace FantasyRPG.Core.Tests
         [Test]
         public void TrySpendAP_CostExceedsCurrentAP_ReturnsFalseAndDoesNotSpend()
         {
-
             const int maxActionPoints = 5;
-            
-            HeroStats stats = new HeroStats(
+
+            HeroStats stats = new(
                 maxHealth: 20,
                 maxActionPoints: maxActionPoints,
                 baseAttack: 10,
@@ -22,9 +21,8 @@ namespace FantasyRPG.Core.Tests
                 critChance: 0f,
                 critMultiplier: 2f
             );
-            
 
-            Hero hero = new Hero("Attacker", stats);
+            Hero hero = new("Attacker", stats);
             bool result = hero.TrySpendAP(6);
 
             ClassicAssert.IsFalse(result);
@@ -37,7 +35,7 @@ namespace FantasyRPG.Core.Tests
             const int maxActionPoints = 5;
             const int cost = 3;
 
-            HeroStats stats = new HeroStats(
+            HeroStats stats = new(
                 maxHealth: 20,
                 maxActionPoints: maxActionPoints,
                 baseAttack: 10,
@@ -46,7 +44,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 0f,
                 critMultiplier: 2f
             );
-            Hero hero = new Hero("Attacker", stats);
+            Hero hero = new("Attacker", stats);
 
             bool result = hero.TrySpendAP(cost);
 
@@ -60,7 +58,7 @@ namespace FantasyRPG.Core.Tests
             const int maxHealth = 20;
             const int damage = 8;
 
-            HeroStats stats = new HeroStats(
+            HeroStats stats = new(
                 maxHealth: maxHealth,
                 maxActionPoints: 5,
                 baseAttack: 10,
@@ -69,7 +67,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 0f,
                 critMultiplier: 2f
             );
-            Hero hero = new Hero("Defender", stats);
+            Hero hero = new("Defender", stats);
 
             hero.TakeDamage(damage);
 
@@ -82,7 +80,7 @@ namespace FantasyRPG.Core.Tests
             const int maxHealth = 20;
             const int lethalDamage = 999;
 
-            HeroStats stats = new HeroStats(
+            HeroStats stats = new(
                 maxHealth: maxHealth,
                 maxActionPoints: 5,
                 baseAttack: 10,
@@ -91,7 +89,7 @@ namespace FantasyRPG.Core.Tests
                 critChance: 0f,
                 critMultiplier: 2f
             );
-            Hero hero = new Hero("Defender", stats);
+            Hero hero = new("Defender", stats);
 
             hero.TakeDamage(lethalDamage);
 
@@ -99,3 +97,4 @@ namespace FantasyRPG.Core.Tests
         }
     }
 }
+
