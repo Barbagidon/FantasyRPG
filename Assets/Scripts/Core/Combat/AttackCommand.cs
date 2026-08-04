@@ -23,6 +23,11 @@ namespace FantasyRPG.Core.Combat
             Hero attacker = _engine.GetUnitById(_attackerId);
             Hero target = _engine.GetUnitById(_targetId);
 
+            return Validate(attacker, target);
+        }
+
+        private bool Validate(Hero attacker, Hero target)
+        {
             return attacker != null
                 && target != null
                 && attacker.CurrentHealth > 0
@@ -32,11 +37,11 @@ namespace FantasyRPG.Core.Combat
 
         public bool Execute()
         {
-            if (!CanExecute())
-                return false;
-
             Hero attacker = _engine.GetUnitById(_attackerId);
             Hero target = _engine.GetUnitById(_targetId);
+
+            if (!Validate(attacker, target))
+                return false;
 
             if (!attacker.TrySpendAP(APCost))
                 return false;
