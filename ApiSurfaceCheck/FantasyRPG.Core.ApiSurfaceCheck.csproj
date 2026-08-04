@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Domain sources only: no NUnit here, this project exists purely so
+         `dotnet build` fails if Core calls an API outside netstandard2.1
+         (the surface Unity's Mono/IL2CPP runtime actually supports). -->
+    <Compile Include="../Assets/Scripts/Core/**/*.cs" />
+  </ItemGroup>
+
+</Project>

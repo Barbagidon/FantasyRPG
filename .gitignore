@@ -22,6 +22,7 @@ ExportedObj/
 .consulo/
 *.csproj
 !/Tests.Core/*.csproj
+!/ApiSurfaceCheck/*.csproj
 *.unityproj
 *.sln
 *.suo
