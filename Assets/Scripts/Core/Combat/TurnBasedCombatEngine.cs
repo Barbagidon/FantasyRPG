@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FantasyRPG.Core.Stats;
 
@@ -29,6 +30,15 @@ namespace FantasyRPG.Core.Combat
             CurrentTurnIndex = 0;
             _turnOrder = new List<Hero>(_playerTeam);
             _turnOrder.AddRange(_enemyTeam);
+            HashSet<int> seenIds = new();
+
+            foreach (Hero unit in _turnOrder)
+            {
+                if (!seenIds.Add(unit.Id))
+                {
+                    throw new ArgumentException($"{unit.Id} is already exists");
+                }
+            }
         }
 
         public void StartCombat()

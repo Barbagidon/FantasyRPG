@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using FantasyRPG.Core.Combat;
 using FantasyRPG.Core.Stats;
@@ -192,6 +193,42 @@ namespace FantasyRPG.Core.Tests
 
             TurnBasedCombatEngine engine = new(playerTeam, enemyTeam);
             Assert.IsNull(engine.GetUnitById(wrongId));
+        }
+
+        [Test]
+        public void TurnBasedCombatEngine_DuplicateHeroId_ThrowsArgumentException()
+        {
+            const int id = 0;
+
+            HeroStats attackerStats = new(
+                maxHealth: 20,
+                maxActionPoints: 10,
+                baseAttack: 10,
+                baseDefense: 0,
+                initiative: 5,
+                moveSpeed: 5,
+                critChance: 1f,
+                critMultiplier: 2f
+            );
+            HeroStats defenderStats = new(
+                maxHealth: 20,
+                maxActionPoints: 10,
+                baseAttack: 0,
+                baseDefense: 0,
+                initiative: 5,
+                moveSpeed: 5,
+                critChance: 0f,
+                critMultiplier: 2f
+            );
+
+            Hero playerHero = new(id, "Attacker", attackerStats, ownerId: 0);
+            Hero enemyHero = new(id, "Defender", defenderStats, ownerId: 0);
+            List<Hero> playerTeam = new() { playerHero };
+            List<Hero> enemyTeam = new() { enemyHero };
+
+            Assert.Throws<ArgumentException>(() =>
+                new TurnBasedCombatEngine(playerTeam, enemyTeam)
+            );
         }
     }
 }

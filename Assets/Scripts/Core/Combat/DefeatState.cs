@@ -5,8 +5,7 @@ namespace FantasyRPG.Core.Combat
     /// </summary>
     public class DefeatState : ICombatState
     {
-        public DefeatState() { }
-
+        // No cleanup required for terminal state.
         public void Enter() { }
 
         public void Exit() { }
