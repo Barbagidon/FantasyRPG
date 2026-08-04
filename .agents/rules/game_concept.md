@@ -28,7 +28,8 @@
 - **`DamageCalculator` (Class):** Pure static/domain methods. First version: physical damage + one magic damage type. Full 5-element damage/resistance matrix is deferred past the first playable campaign (see roadmap cuts).
 
 ### 3. Turn-Based Combat Subsystem (`FantasyRPG.Core.Combat`)
-- **Grid:** integer `(x, y)` coordinates, `Assets/Scripts/Core`. 8-directional movement, orthogonal step cheaper than diagonal (e.g. 10 vs 14), no cutting a diagonal through a blocked corner.
+- **Grid:** integer `(x, y)` coordinates, `Assets/Scripts/Core`. 8-directional movement, orthogonal step cheaper than diagonal (e.g. 10 vs 14), no cutting a diagonal through a blocked corner — a diagonal needs **both** flanking orthogonal cells passable, per [ADR-0003](../../docs/decisions/0003-movement-legality-occupancy-and-diagonal-corners.md).
+- **Occupancy:** at most one living unit per cell. You may path *through* an ally but not stop on their cell; an enemy's cell blocks movement entirely (body-blocking). Corpses don't block. Consequence worth knowing while designing encounters: an orthogonally adjacent enemy geometrically denies three of your eight directions. See ADR-0003.
 - **AP System:** Action Points spent on movement and abilities via `ICombatCommand`. No verticality/High Ground, no free (NavMesh) movement — both cut deliberately, see roadmap.
 - **Line of Sight:** Bresenham-style, blocks ranged attacks and reveals cover bonus. Implemented as pure `Core` logic, unit-testable.
 - **Finite State Machine (FSM):** States for `InitState` (turn order sorted by `Initiative`, not `Speed`), `PlayerTurnState`, `EnemyTurnState`, `VictoryState`, `DefeatState`. Strict round-robin, no simultaneous actions, no `Delay Turn` mechanic (deliberately cut — adds FSM complexity the strict-order/one-hero-per-player model is meant to avoid).
