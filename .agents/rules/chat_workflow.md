@@ -14,6 +14,7 @@ When starting a new chat thread in this workspace:
 - Read `.agents/rules/code_review_rules.md` for Zero-GC, Netcode & Roslyn review checklist.
 - Read `.agents/rules/game_concept.md` for game systems specifications (target design, not necessarily implemented yet).
 - Read `docs/roadmap.md` to identify the current milestone, its checklist, and its closure criterion — this is the single source of truth for progress, not `project_wiki.md` (which is now just a redirect to `docs/README.md`).
+- Read `docs/decisions/README.md` — the ADR index (one line per decision, cheap to read). Then, **before designing or reviewing anything in a subsystem an `Accepted` ADR already covers, read that ADR in full and treat it as binding.** ADRs record decisions that were already argued through with alternatives and rejection reasons; re-deriving a different answer in-chat and acting on it silently is how a settled decision gets lost. If an ADR looks wrong, say so explicitly and propose a superseding ADR (per its own «Правила ведения») — do not just quietly implement something else.
 
 ### 2. Session Scoping — by Milestone, Not by Subsystem
 Old subsystem-based sessions (Domain Core / Domain Combat / Quests & Inventory / Presentation / Networking) are retired — they don't match the actual milestone plan and pulled in a quest engine that was later cut. Scope each session to the current milestone in `docs/roadmap.md` instead:

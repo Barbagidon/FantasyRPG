@@ -53,3 +53,9 @@ Assets/Scripts/
 7. **MVP (Model-View-Presenter) with Passive View for UI (`FantasyRPG.UI`)**:
    - `View` components (`MonoBehaviour` / UI Toolkit) contain zero business logic.
    - `Presenter` classes subscribe to the `Event Bus` and update `View` elements reactively, with zero polling in `Update()`.
+
+## Recorded Decisions (ADR)
+
+Decisions that were argued through with explicit alternatives live in `docs/decisions/` (index: `docs/decisions/README.md`), not in this file. This file holds standing engineering rules; an ADR holds one specific decision plus the alternatives rejected and why. An `Accepted` ADR is **binding** — see `.agents/rules/chat_workflow.md` §1 for the read-before-design obligation and for how to supersede one.
+
+- **Grid movement & reachability — [ADR-0001](../../docs/decisions/0001-pathfinding-bounded-dijkstra.md) (Accepted):** bounded Dijkstra with a pre-allocated compact open-set; linear min-scan over open cells only; tie-break on `(cost, cellIndex)` for a total order independent of insertion order; flat arrays indexed `y * width + x`; zero allocations per query; `GridPosition` as a `readonly struct` implementing `IEquatable<GridPosition>`. **BFS is explicitly rejected** — with weights 10/14 it orders traversal by step count rather than cost and is already wrong on a 3×2 grid with no obstacles. `System.Collections.Generic.PriorityQueue<,>` is also rejected: it does not exist in `netstandard2.1` (see the API-surface gate above) and would compile under `net10.0` while failing inside Unity. Traversability and stopping are two separate predicates (`CanTraverse(from, to)` vs `CanStopAt(cell)`), and neighbour bounds must be checked on `x` and `y` separately — a single `index < cellCount` check does not catch wrap-around past the map edge. Movement/AP currency, the exact diagonal-corner rule, and the line-of-sight specification are deliberately **not** settled by that ADR and need their own.
