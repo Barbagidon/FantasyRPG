@@ -36,7 +36,7 @@ namespace FantasyRPG.Core.Combat
             {
                 if (!seenIds.Add(unit.Id))
                 {
-                    throw new ArgumentException($"{unit.Id} is already exists");
+                    throw new ArgumentException($"Duplicate Hero.Id: {unit.Id}");
                 }
             }
         }
