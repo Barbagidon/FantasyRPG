@@ -32,8 +32,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero playerHero = new(0, "Attacker", attackerStats);
-            Hero enemyHero = new(1, "Defender", defenderStats);
+            Hero playerHero = new(0, "Attacker", attackerStats, ownerId: 0);
+            Hero enemyHero = new(1, "Defender", defenderStats, ownerId: 0);
             List<Hero> playerTeam = new() { playerHero };
             List<Hero> enemyTeam = new() { enemyHero };
 
@@ -70,8 +70,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero playerHero = new(0, "Attacker", attackerStats);
-            Hero enemyHero = new(1, "Defender", defenderStats);
+            Hero playerHero = new(0, "Attacker", attackerStats, ownerId: 0);
+            Hero enemyHero = new(1, "Defender", defenderStats, ownerId: 0);
             List<Hero> playerTeam = new() { playerHero };
             List<Hero> enemyTeam = new() { enemyHero };
 
@@ -109,8 +109,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero playerHero = new(0, "Attacker", attackerStats);
-            Hero enemyHero = new(1, "Defender", defenderStats);
+            Hero playerHero = new(0, "Attacker", attackerStats, ownerId: 0);
+            Hero enemyHero = new(1, "Defender", defenderStats, ownerId: 0);
             List<Hero> playerTeam = new() { playerHero };
             List<Hero> enemyTeam = new() { enemyHero };
 
@@ -148,8 +148,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero playerHero = new(playerId, "Attacker", attackerStats);
-            Hero enemyHero = new(enemyId, "Defender", defenderStats);
+            Hero playerHero = new(playerId, "Attacker", attackerStats, ownerId: 0);
+            Hero enemyHero = new(enemyId, "Defender", defenderStats, ownerId: 0);
             List<Hero> playerTeam = new() { playerHero };
             List<Hero> enemyTeam = new() { enemyHero };
 
@@ -185,8 +185,8 @@ namespace FantasyRPG.Core.Tests
                 critMultiplier: 2f
             );
 
-            Hero playerHero = new(playerId, "Attacker", attackerStats);
-            Hero enemyHero = new(enemyId, "Defender", defenderStats);
+            Hero playerHero = new(playerId, "Attacker", attackerStats, ownerId: 0);
+            Hero enemyHero = new(enemyId, "Defender", defenderStats, ownerId: 0);
             List<Hero> playerTeam = new() { playerHero };
             List<Hero> enemyTeam = new() { enemyHero };
 

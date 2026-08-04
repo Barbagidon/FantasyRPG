@@ -6,6 +6,10 @@ namespace FantasyRPG.Core.Stats
     public class Hero
     {
         public int Id { get; private set; }
+
+        // Потребитель — Netcode ownership (Веха 3), сейчас не используется.
+        public int OwnerId { get; private set; }
+
         public string Name { get; private set; }
         public int CurrentActionPoints { get; private set; }
         public HeroStats Stats { get; private set; }
@@ -13,9 +17,10 @@ namespace FantasyRPG.Core.Stats
         public Armor EquippedArmor { get; private set; }
         public int CurrentHealth { get; private set; }
 
-        public Hero(int id, string name, HeroStats baseStats)
+        public Hero(int id, string name, HeroStats baseStats, int ownerId)
         {
             Id = id;
+            OwnerId = ownerId;
             Name = name;
             CurrentActionPoints = baseStats.MaxActionPoints;
             Stats = baseStats;
