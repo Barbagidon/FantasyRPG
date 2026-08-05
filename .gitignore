@@ -44,3 +44,9 @@ ExportedObj/
 
 # Unity3D generated file on crash reports
 sysinfo.txt
+
+# VS Code settings
+.vscode/
+
+# Solution Extension
+*.slnx
