@@ -6,7 +6,7 @@ indent_style = space
 indent_size = 4
 end_of_line = crlf
 charset = utf-8
-trim_trailing_whitespace = true
+trim_trailing_whitespace = false
 insert_final_newline = true
 
 [*.cs]
@@ -34,3 +34,5 @@ dotnet_diagnostic.IDE0051.severity = error
 dotnet_diagnostic.IDE0052.severity = error
 dotnet_diagnostic.IDE0005.severity = error
 
+# Ignore namespace vs folder structure mismatch (standard for Unity)
+dotnet_diagnostic.IDE0130.severity = none
