@@ -35,6 +35,17 @@ namespace FantasyRPG.Core.Tests
             bool areEqual = firstPosition.Equals((object)secondPosition);
             Assert.IsTrue(areEqual);
         }
+
+        [Test]
+        public void GetHashCode_SwappedCoordinates_ReturnsDifferentHashes()
+        {
+            GridPosition firstPosition = new(1, 2);
+            GridPosition secondPosition = new(2, 1);
+
+            int firstHashCode = firstPosition.GetHashCode();
+            int secondHashCode = secondPosition.GetHashCode();
+
+            Assert.AreNotEqual(firstHashCode, secondHashCode);
+        }
     }
 }
-
