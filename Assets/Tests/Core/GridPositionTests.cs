@@ -87,5 +87,13 @@ namespace FantasyRPG.Core.Tests
 
             Assert.AreNotEqual(firstHashCode, secondHashCode);
         }
+
+        [Test]
+        public void ToString_DifferentCoordinates_ReturnsCoordinatesInXYOrder()
+        {
+            GridPosition position = new(3, 4);
+
+            Assert.AreEqual("(3, 4)", position.ToString());
+        }
     }
 }
