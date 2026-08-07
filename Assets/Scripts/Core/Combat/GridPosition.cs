@@ -7,15 +7,25 @@ namespace FantasyRPG.Core.Combat
         public int X { get; }
         public int Y { get; }
 
+        public GridPosition(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
         public bool Equals(GridPosition other)
         {
             return X == other.X && Y == other.Y;
         }
 
-        public GridPosition(int x, int y)
+        public static bool operator ==(GridPosition left, GridPosition right)
         {
-            X = x;
-            Y = y;
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(GridPosition left, GridPosition right)
+        {
+            return !left.Equals(right);
         }
 
         public override bool Equals(object obj)
@@ -29,6 +39,11 @@ namespace FantasyRPG.Core.Combat
             {
                 return (X * 397) ^ Y;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"({X}, {Y})";
         }
     }
 }
