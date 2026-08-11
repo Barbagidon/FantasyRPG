@@ -4,7 +4,10 @@ root = true
 [*]
 indent_style = space
 indent_size = 4
-end_of_line = crlf
+# LF, не CRLF: репозиторий фактически хранит LF (включая .cs, Unity-генерируемые .meta и
+# ProjectSettings/*.asset), и csharpier уважает эту настройку. Пока здесь стояло crlf, любой прогон
+# `dotnet csharpier format .` переписал бы все файлы целиком и сделал диффы нечитаемыми на ревью.
+end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = false
 insert_final_newline = true
